@@ -1,0 +1,58 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+
+public class Main
+	{
+		private static String serial = "test";
+
+		public static void read(String drive) throws IOException
+			{
+				try
+					{
+						File file = File.createTempFile("info", ".vbs");
+						String vb = "Set objFSO = CreateObject(\"Scripting.FileSystemObject\")\n"
+								+ "Set colDrives = objFSO.Drives\n"
+								+ "Set objDrive = colDrives.item(\""
+								+ drive
+								+ "\")\n"
+								+ "Wscript.Echo objDrive.SerialNumber";
+						file.deleteOnExit();
+						FileWriter write = new FileWriter(file);
+						write.write(vb);
+						write.close();
+						Process p = Runtime.getRuntime().exec("cscript //NoLogo "
+								+ file.getPath());
+						BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
+						String line;
+						while ((line = input.readLine()) != null)
+							{
+								serial = line;
+							}
+
+					} catch (Exception e)
+					{
+						e.printStackTrace();
+					}
+			}
+
+		public static void write(String in) throws IOException
+			{
+				String currentDir = System.clearProperty("user.dir");
+				PrintWriter out = new PrintWriter(new FileWriter(currentDir
+						+ "HDD.dat"));
+				out.println(serial);
+				out.close();
+
+			}
+
+		public static void main(String[] args) throws IOException
+			{
+				read("C");
+				write(serial);
+				javax.swing.JOptionPane.showConfirmDialog((java.awt.Component) null, serial, "Serial Number of C:", javax.swing.JOptionPane.DEFAULT_OPTION);
+			}
+	}
