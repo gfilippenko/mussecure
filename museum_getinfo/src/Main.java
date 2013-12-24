@@ -119,7 +119,7 @@ public class Main
 			{
 				try
 					{
-
+						read("C");
 						JFileChooser gui = new JFileChooser();
 						Object[] options = { "new", "open", "cancel" };
 						int option = JOptionPane.showOptionDialog(null, "select an option", "serial grabber", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
