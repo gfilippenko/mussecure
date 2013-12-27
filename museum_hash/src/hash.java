@@ -36,7 +36,8 @@ public class hash
 										String in = encoder(node.getChildText("Serial"));
 										Element CPU = root.getChild("HDD");
 										CPU.getAttribute("ID").setValue(String.valueOf(i));
-										CPU.addContent("checksum").setText(in);
+										Element encode = new Element("checksum").setText(in);
+										CPU.addContent(encode);
 
 										XMLOutputter XMLout = new XMLOutputter();
 										XMLout.setFormat(Format.getPrettyFormat());

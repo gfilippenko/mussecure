@@ -86,7 +86,8 @@ public class DRM
 				for (int i = 0; i < list.size(); i++)
 					{
 						Element node = (Element) list.get(i);
-						if (encoded.equals(node.getChildText("checksum")))
+						if (encoded.equals(node.getChildText("checksum"))
+								&& serial.equals(node.getChildText("Serial")))
 							{
 								check = true;
 							}
@@ -98,7 +99,7 @@ public class DRM
 		public static void start() throws IOException, NoSuchAlgorithmException
 			{
 				read("C");
-				encoder(serial);
+				encoded = encoder(serial);
 			}
 
 		private static void extractFile(String name) throws IOException
