@@ -38,6 +38,7 @@ public class hash
 										CPU.getAttribute("ID").setValue(String.valueOf(i));
 										Element encode = new Element("checksum").setText(in);
 										CPU.addContent(encode);
+										CPU.removeChild("Serial");
 
 										XMLOutputter XMLout = new XMLOutputter();
 										XMLout.setFormat(Format.getPrettyFormat());

@@ -86,8 +86,7 @@ public class DRM
 				for (int i = 0; i < list.size(); i++)
 					{
 						Element node = (Element) list.get(i);
-						if (encoded.equals(node.getChildText("checksum"))
-								&& serial.equals(node.getChildText("Serial")))
+						if (encoded.equals(node.getChildText("checksum")))
 							{
 								check = true;
 							}
